@@ -1,0 +1,25 @@
+import { Router } from "express";
+import catchAsync from "../../utils/catchAsync";
+import * as productController from "./product.controller";
+import { validateRequest } from "../../middleware/validate-request";
+import { createProductSchema } from "./product.request";
+
+const route = Router();
+
+route.post(
+  "/",
+  validateRequest(createProductSchema),
+  catchAsync(productController.create)
+);
+
+route.get("/", catchAsync(productController.retrive));
+route.get("/category/:categoryId", catchAsync(productController.retriveByCategory));
+route.get("/:productId", catchAsync(productController.retriveById));
+route.patch(
+  "/:productId",
+  catchAsync(productController.update)
+);
+
+route.delete("/:productId", catchAsync(productController.remove));
+
+export default route;

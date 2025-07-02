@@ -1,0 +1,42 @@
+{
+  "name": "express-sample",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Hari",
+  "license": "MIT",
+  "scripts": {
+    "build": "rm -rf build && npx tsc",
+    "start": "node build/index.js",
+    "dev": "nodemon --exec 'node -r @swc-node/register' src/index.ts",
+    "format": "npx prisma generate && npx prisma format",
+    "db.push": "npx prisma db push",
+    "db.pull": "npx prisma db pull"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.0.1",
+    "bcrypt": "^5.1.1",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "joi": "^17.13.3",
+    "jsonwebtoken": "^9.0.2",
+    "nodemon": "^3.1.0",
+    "winston": "^3.13.0"
+  },
+  "devDependencies": {
+    "@swc-node/register": "^1.10.10",
+    "@swc/cli": "^0.3.12",
+    "@swc/core": "^1.4.11",
+    "@types/bcrypt": "^5.0.2",
+    "@types/cookie-parser": "^1.4.7",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/geojson": "^7946.0.14",
+    "@types/jsonwebtoken": "^9.0.7",
+    "@types/node-cron": "^3.0.11",
+    "@types/pg": "^8.11.5",
+    "prisma": "^6.0.1",
+    "typescript": "^5.4.3"
+  }
+}

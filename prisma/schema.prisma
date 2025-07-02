@@ -1,0 +1,87 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  username  String   @unique
+  password  String
+  name      String
+  role      Role     @default(USER)
+  isActive  Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  sales Sale[]
+
+  @@map("user")
+}
+
+model Category {
+  id        String   @id @default(uuid())
+  name      String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  products Product[] // one-to-many relation
+}
+
+model Product {
+  id          String   @id @default(uuid())
+  name        String
+  description String
+  categoryId  String
+  buyPrice    Int
+  sellPrice   Int
+  stock       Int
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  category Category @relation(fields: [categoryId], references: [id])
+
+  saleItems SaleItem[]
+
+  @@map("Product")
+}
+
+model Sale {
+  id        String   @id @default(uuid())
+  userId    String
+  total     Int
+  createdAt DateTime @default(now())
+
+  user  User       @relation(fields: [userId], references: [id])
+  items SaleItem[]
+
+  @@map("sale")
+}
+
+model SaleItem {
+  id        String @id @default(uuid())
+  saleId    String
+  productId String
+  quantity  Int
+  unitPrice Int // harga jual historis
+  buyPrice  Int // harga beli historis
+
+  sale    Sale    @relation(fields: [saleId], references: [id])
+  product Product @relation(fields: [productId], references: [id])
+
+  @@map("sale_item")
+}
+
+enum Role {
+  ADMIN
+  USER
+}
