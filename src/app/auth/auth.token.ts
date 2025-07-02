@@ -17,6 +17,7 @@ export const generateAccessToken = (user: User): string => {
       name: user.name,
       id: user.id,
       email: user.username,
+      role: user.role,
     },
     expired,
     secretKey: config.jwt.accessPrivateKey,
@@ -30,6 +31,7 @@ export const generateRefreshToken = (user: User): string => {
     payload: {
       type: "REFRESH",
       userId: user.id,
+      role: user.role,
     },
     expired,
     secretKey: config.jwt.accessPrivateKey,

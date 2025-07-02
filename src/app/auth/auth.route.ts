@@ -1,7 +1,7 @@
 import { Router } from "express";
-import catchAsync from "../../utils/catchAsync";
+import catchAsync from "../../utils/catch.async";
 import * as authController from "./auth.controller";
-import { validateRequest } from "../../middleware/validate-request";
+import { validateRequest } from "../../utils/validate.request";
 import { createUserSchema, loginShema } from "./auth.request";
 
 const route = Router();

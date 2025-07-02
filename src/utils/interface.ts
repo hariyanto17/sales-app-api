@@ -1,3 +1,5 @@
+import { JwtPayload } from "jsonwebtoken";
+
 export type ErrorCode =
   | "BAD_REQUEST"
   | "UNAUTHORIZED"
@@ -64,3 +66,10 @@ export const ERROR_CODE: ERROR_CODE_TYPE = {
     httpStatus: 429,
   },
 };
+
+export interface PayloadAccessToken extends JwtPayload {
+  name: string;
+  id: string;
+  email: string;
+  role: "ADMIN" | "USER";
+}

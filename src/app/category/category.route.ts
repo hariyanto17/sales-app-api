@@ -1,10 +1,13 @@
 import { Router } from "express";
-import catchAsync from "../../utils/catchAsync";
+import catchAsync from "../../utils/catch.async";
 import * as authController from "./category.controller";
-import { validateRequest } from "../../middleware/validate-request";
+import { validateRequest } from "../../utils/validate.request";
 import { createCategorySchema } from "./category.request";
+import { authMiddleware } from "../../middleware/auth.middleware";
 
 const route = Router();
+
+route.use(authMiddleware("ADMIN"));
 
 route.post(
   "/",
