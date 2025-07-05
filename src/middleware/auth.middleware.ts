@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
-import { Secret, verify } from "jsonwebtoken";
+import { verify } from "jsonwebtoken";
 import { config } from "../utils";
-import { PayloadAccessToken } from "../utils/interface";
+import { CustomRequest, PayloadAccessToken } from "../utils/interface";
 
 type Roles = "ADMIN" | "USER";
 
@@ -39,5 +39,6 @@ export const authMiddleware =
       });
     }
 
+    (request as CustomRequest).auth = decoded;
     next();
   };

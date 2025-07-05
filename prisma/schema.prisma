@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -58,11 +52,10 @@ model Product {
 model Sale {
   id        String   @id @default(uuid())
   userId    String
-  total     Int
   createdAt DateTime @default(now())
 
-  user  User       @relation(fields: [userId], references: [id])
-  items SaleItem[]
+  user     User       @relation(fields: [userId], references: [id])
+  saleItem SaleItem[]
 
   @@map("sale")
 }
@@ -72,8 +65,8 @@ model SaleItem {
   saleId    String
   productId String
   quantity  Int
-  unitPrice Int // harga jual historis
-  buyPrice  Int // harga beli historis
+  unitPrice Int
+  buyPrice  Int
 
   sale    Sale    @relation(fields: [saleId], references: [id])
   product Product @relation(fields: [productId], references: [id])

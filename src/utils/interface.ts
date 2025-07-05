@@ -1,4 +1,5 @@
 import { JwtPayload } from "jsonwebtoken";
+import { Request } from "express";
 
 export type ErrorCode =
   | "BAD_REQUEST"
@@ -72,4 +73,8 @@ export interface PayloadAccessToken extends JwtPayload {
   id: string;
   email: string;
   role: "ADMIN" | "USER";
+}
+
+export interface CustomRequest extends Request {
+  auth: PayloadAccessToken;
 }

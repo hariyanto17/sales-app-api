@@ -16,7 +16,6 @@ import {
 export const create = async (body: productRequest["body"]) => {
   const { name, categoryId } = body;
   const category = await findCategoryById(categoryId);
-  console.log({ category, categoryId });
   if (!category) {
     return new AppError(ERROR_CODE.CONFLICT.code, "categori tidak di temukan");
   }
@@ -47,7 +46,6 @@ export const update = async (
   return await updateProduct(productId, body);
 };
 
-
-export const remove = async(productId: string) => {
-    return await removeProduct(productId)
-}
+export const remove = async (productId: string) => {
+  return await removeProduct(productId);
+};

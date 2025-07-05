@@ -26,7 +26,7 @@ export const login = async (body: LoginRequest["body"]) => {
   if (!isValidPassword) {
     return new AppError(ERROR_CODE.NOT_FOUND.code, "Password tidak sesuai");
   }
-
+  console.log("user", user);
   const accessToken = generateAccessToken(user);
   const refreshToken = generateRefreshToken(user);
 
