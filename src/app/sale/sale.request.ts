@@ -14,16 +14,12 @@ export const createSaleSchema = Joi.object({
       })
     )
     .required()
-    .messages({
-      "array.base": "Sale items must be an array",
-      "array.empty": "Sale items cannot be empty",
-      "array.min": "Sale items must contain at least one item",
-      "any.required": "Sale items are required",
-      "object.base": "Each sale item must be an object",
-      "object.unknown": "Sale item contains unknown fields",
-      "string.base": "Product ID must be a string",
-      "string.empty": "Product ID cannot be empty",
-      "number.base": "Quantity, unit price, and buy price must be numbers",
-      "number.integer": "Quantity, unit price, and buy price must be integers",
-    }),
+    .messages(generalMessage),
+}).messages(generalMessage);
+
+export const retrieveSalesSchema = Joi.object({
+  startDate: Joi.date().required().messages(generalMessage),
+  endDate: Joi.date().required().messages(generalMessage),
+  categoryId: Joi.string().optional().messages(generalMessage),
+  productId: Joi.string().optional().messages(generalMessage),
 }).messages(generalMessage);

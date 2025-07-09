@@ -6,3 +6,18 @@ export interface SaleRequest extends CustomRequest {
     saleItem: SaleItem[];
   };
 }
+
+export interface PayloadQuery {
+  startDate: Date;
+  endDate: Date;
+  categoryId?: string;
+  productId?: string;
+}
+
+type PropertiesToString<T> = {
+  [P in keyof T]: string;
+};
+
+export interface SaleRequestWithQuery extends CustomRequest {
+  query: PropertiesToString<PayloadQuery>;
+}
